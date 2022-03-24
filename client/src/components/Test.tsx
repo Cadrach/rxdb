@@ -1,25 +1,42 @@
 import React from 'react';
-import { createRxDatabase } from 'rxdb';
-import { getRxStorageDexie } from 'rxdb/plugins/dexie';
-import {useMount} from "ahooks";
-import {Button} from "antd";
-
-const createDatabase = async () => {
-  const dbDexie = await createRxDatabase({
-      name: 'mydatabase',
-      storage: getRxStorageDexie()
-  });
-
-  return dbDexie;
-};
+import {Button, Space, Table} from "antd";
+import {useRxCollection, useRxData} from "rxdb-hooks";
 
 const Test = () => {
+    const usersCollection = useRxCollection('users');
+    const {result: users} = useRxData('users', c => c.find());
 
-  useMount(() => {
-    createDatabase();
-  })
+    const addItem = () => {
+        const id = 'id' + (new Date()).getTime();
+        console.log("ADD ITEM ", id);
+        usersCollection?.insert({
+            id,
+            "email": "test@test.com",
+            "name": "test",
+        });
+    };
 
-  return <span>HELLO WORD<Button>TEST</Button></span>;
-}
+    const deleteItem = (row:any) => {
+        usersCollection?.bulkRemove([row.id]);
+    };
+
+    const tableConfig = {
+        rowKey: "id",
+        dataSource: users,
+        columns: [
+            {title: 'ID', dataIndex: "id"},
+            {title: "Name", dataIndex: "name"},
+            {render: (row:any) => <Button onClick={() => deleteItem(row)}>Delete</Button>}
+        ]
+    };
+
+    return <span>
+        <Table {...tableConfig}/>
+        <Space>
+            <Button onClick={addItem}>TEST</Button>
+            <Button onClick={() => usersCollection?.remove()}>Truncate</Button>
+        </Space>
+    </span>;
+};
 
 export default Test;

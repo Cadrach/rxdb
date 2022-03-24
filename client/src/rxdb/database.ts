@@ -1,9 +1,17 @@
 import {createRxDatabase} from "rxdb";
-//
-// // ...or use the Dexie.js RxStorage that stores data in IndexedDB.
-// import { getRxStorageDexie } from 'rxdb/plugins/dexie';
-//
-// const dbDexie = await createRxDatabase({
-//     name: 'mydatabase',
-//     storage: getRxStorageDexie()
-// });
+import { getRxStorageDexie } from 'rxdb/plugins/dexie';
+import {users} from './schema';
+
+export const createDatabase = async () => {
+    const db = await createRxDatabase({
+        name: 'mydatabase',
+        storage: getRxStorageDexie()
+    });
+    const collections = await db.addCollections({
+        users: {
+            schema: users
+        }
+    });
+
+    return db;
+};
