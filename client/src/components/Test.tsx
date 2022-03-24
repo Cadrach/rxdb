@@ -1,16 +1,17 @@
 import React from 'react';
 import {Button, Space, Table} from "antd";
 import {useRxCollection, useRxData} from "rxdb-hooks";
+import { v4 as uuidv4} from "uuid";
 
 const Test = () => {
     const usersCollection = useRxCollection('users');
     const {result: users} = useRxData('users', c => c.find());
 
     const addItem = () => {
-        const id = 'id' + (new Date()).getTime();
+        const id = uuidv4();
         console.log("ADD ITEM ", id);
         usersCollection?.insert({
-            id,
+            "uuid": id,
             "email": "test@test.com",
             "name": "test",
         });
@@ -21,10 +22,10 @@ const Test = () => {
     };
 
     const tableConfig = {
-        rowKey: "id",
+        rowKey: "uuid",
         dataSource: users,
         columns: [
-            {title: 'ID', dataIndex: "id"},
+            {title: 'ID', dataIndex: "uuid"},
             {title: "Name", dataIndex: "name"},
             {render: (row:any) => <Button onClick={() => deleteItem(row)}>Delete</Button>}
         ]

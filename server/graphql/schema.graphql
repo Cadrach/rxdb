@@ -24,6 +24,9 @@ type User {
     "Unique primary key."
     id: ID!
 
+    "Unique uuid."
+    uuid: String!
+
     "Non-unique name."
     name: String!
 
@@ -38,4 +41,7 @@ type User {
 
     "When the account was last updated."
     updated_at: DateTime!
+
+    "When the account was last updated."
+    deleted_at: DateTime
 }

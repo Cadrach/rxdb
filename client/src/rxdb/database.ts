@@ -1,6 +1,34 @@
 import {createRxDatabase} from "rxdb";
+import { RxDBReplicationGraphQLPlugin } from 'rxdb/plugins/replication-graphql';
+import {addRxPlugin} from "rxdb";
 import { getRxStorageDexie } from 'rxdb/plugins/dexie';
 import {users} from './schema';
+
+//Add plugin for GraphQL
+addRxPlugin(RxDBReplicationGraphQLPlugin);
+
+const pullQueryBuilder = (doc:any) => {
+    if (!doc) {
+        // the first pull does not have a start-document
+        doc = {
+            id: '',
+            updatedAt: 0
+        };
+    }
+    const query = `{
+        feedForRxDBReplication(lastId: "${doc.name}", minUpdatedAt: ${doc.updatedAt}, limit: 5) {
+            id,
+            name,
+            lastName,
+            updatedAt
+            deleted
+        }
+    }`;
+    return {
+        query,
+        variables: {}
+    };
+};
 
 export const createDatabase = async () => {
     const db = await createRxDatabase({
@@ -12,6 +40,17 @@ export const createDatabase = async () => {
             schema: users
         }
     });
+
+    // collections.users.syncGraphQL({
+    //     url: 'http://localhost/rxdb/server/public/graphql', // url to the GraphQL endpoint
+    //     pull: {
+    //         queryBuilder: pullQueryBuilder, // the queryBuilder from above
+    //         // modifier: doc => doc, // (optional) modifies all pulled documents before they are handeled by RxDB. Returning null will skip the document.
+    //         // dataPath: undefined // (optional) specifies the object path to access the document(s). Otherwise, the first result of the response data is used.
+    //     },
+    //     deletedFlag: 'deleted_at', // the flag which indicates if a pulled document is deleted
+    //     live: true // if this is true, rxdb will watch for ongoing changes and sync them, when false, a one-time-replication will be done
+    // });
 
     return db;
 };

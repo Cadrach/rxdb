@@ -2,10 +2,10 @@ const users = {
     "title": "User Schema",
     "version": 0,
     "description": "Describes a single user",
-    "primaryKey": "id",
+    "primaryKey": "uuid",
     "type": "object",
     "properties": {
-        "id": {
+        "uuid": {
             "type": "string"
         },
         "name": {
@@ -13,7 +13,16 @@ const users = {
         },
         "email": {
             "type": "string"
-        }
+        },
+        "created_at": {
+            "type": "string"
+        },
+        "updated_at": {
+            "type": "string"
+        },
+        "deleted_at": {
+            "type": "string"
+        },
     }
 }
 
