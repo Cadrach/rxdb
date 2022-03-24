@@ -74,7 +74,7 @@ directive @can(
   Mutually exclusive with `search`.
   """
   find: String
-) repeatable on FIELD_DEFINITION
+) on FIELD_DEFINITION
 
 """
 Any constant literal value: https://graphql.github.io/graphql-spec/draft/#sec-Input-Values
@@ -96,7 +96,7 @@ directive @guard(
   When not defined, the default from `lighthouse.php` is used.
   """
   with: [String!]
-) repeatable on FIELD_DEFINITION | OBJECT
+) on FIELD_DEFINITION | OBJECT
 
 # Directive class: Nuwave\Lighthouse\Auth\WhereAuthDirective
 """
@@ -406,7 +406,7 @@ directive @rules(
   Specify the messages to return if the validators fail.
   """
   messages: [RulesMessage!]
-) repeatable on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 """
 Input for the `messages` argument of `@rules`.
@@ -444,7 +444,7 @@ directive @rulesForArray(
   Specify the messages to return if the validators fail.
   """
   messages: [RulesForArrayMessage!]
-) repeatable on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 """
 Input for the `messages` argument of `@rulesForArray`.
@@ -480,7 +480,7 @@ directive @validator(
   and the field name: `{$parent}\{$field}Validator`.
   """
   class: String
-) repeatable on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION | FIELD_DEFINITION | INPUT_OBJECT
+) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION | FIELD_DEFINITION | INPUT_OBJECT
 
 # Directive class: Nuwave\Lighthouse\Schema\Directives\AggregateDirective
 """
@@ -660,7 +660,7 @@ directive @builder(
   Only used when the directive is added on a field.
   """
   value: BuilderValue
-) repeatable on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION | FIELD_DEFINITION
+) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION | FIELD_DEFINITION
 
 """
 Any constant literal value: https://graphql.github.io/graphql-spec/draft/#sec-Input-Values
@@ -874,7 +874,7 @@ directive @eq(
   Only required when this directive is used on a field.
   """
   value: EqValue
-) repeatable on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION | FIELD_DEFINITION
+) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION | FIELD_DEFINITION
 
 """
 Any constant literal value: https://graphql.github.io/graphql-spec/draft/#sec-Input-Values
@@ -893,7 +893,7 @@ directive @event(
   Specify the fully qualified class name (FQCN) of the event to dispatch.
   """
   dispatch: String!
-) repeatable on FIELD_DEFINITION
+) on FIELD_DEFINITION
 
 # Directive class: Nuwave\Lighthouse\Schema\Directives\FieldDirective
 """
@@ -1045,7 +1045,7 @@ directive @in(
   Only required if database column has a different name than the attribute in your schema.
   """
   key: String
-) repeatable on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 # Directive class: Nuwave\Lighthouse\Schema\Directives\InjectDirective
 """
@@ -1065,7 +1065,7 @@ directive @inject(
   within the incoming argument.
   """
   name: String!
-) repeatable on FIELD_DEFINITION
+) on FIELD_DEFINITION
 
 # Directive class: Nuwave\Lighthouse\Schema\Directives\InterfaceDirective
 """
@@ -1090,7 +1090,7 @@ directive @lazyLoad(
   The names of the relationship methods to load.
   """
   relations: [String!]!
-) repeatable on FIELD_DEFINITION
+) on FIELD_DEFINITION
 
 # Directive class: Nuwave\Lighthouse\Schema\Directives\LikeDirective
 """
@@ -1118,7 +1118,7 @@ directive @like(
   Only used when the directive is added on a field.
   """
   value: String
-) repeatable on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION | FIELD_DEFINITION
+) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION | FIELD_DEFINITION
 
 # Directive class: Nuwave\Lighthouse\Schema\Directives\LimitDirective
 """
@@ -1271,7 +1271,7 @@ directive @morphToMany(
 Redefine the default namespaces used in other directives.
 The arguments are a map from directive names to namespaces.
 """
-directive @namespace repeatable on FIELD_DEFINITION | OBJECT
+directive @namespace on FIELD_DEFINITION | OBJECT
 
 # Directive class: Nuwave\Lighthouse\Schema\Directives\NeqDirective
 """
@@ -1283,7 +1283,7 @@ directive @neq(
   Only required if database column has a different name than the attribute in your schema.
   """
   key: String
-) repeatable on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 # Directive class: Nuwave\Lighthouse\Schema\Directives\NestDirective
 """
@@ -1302,7 +1302,7 @@ directive @notIn(
   Only required if database column has a different name than the attribute in your schema.
   """
   key: String
-) repeatable on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 # Directive class: Nuwave\Lighthouse\Schema\Directives\RenameArgsDirective
 """
@@ -1352,7 +1352,7 @@ directive @scope(
   Defaults to the name of the argument.
   """
   name: String
-) repeatable on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 # Directive class: Nuwave\Lighthouse\Schema\Directives\SpreadDirective
 """
@@ -1475,7 +1475,7 @@ directive @whereBetween(
   Only required if database column has a different name than the attribute in your schema.
   """
   key: String
-) repeatable on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 # Directive class: Nuwave\Lighthouse\Schema\Directives\WhereDirective
 """
@@ -1498,7 +1498,7 @@ directive @where(
   This only works for clauses with the signature (string $column, string $operator, mixed $value).
   """
   clause: String
-) repeatable on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 # Directive class: Nuwave\Lighthouse\Schema\Directives\WhereJsonContainsDirective
 """
@@ -1510,7 +1510,7 @@ directive @whereJsonContains(
   Only required if database column has a different name than the attribute in your schema.
   """
   key: String
-) repeatable on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 # Directive class: Nuwave\Lighthouse\Schema\Directives\WhereNotBetweenDirective
 """
@@ -1525,7 +1525,7 @@ directive @whereNotBetween(
   Only required if database column has a different name than the attribute in your schema.
   """
   key: String
-) repeatable on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 # Directive class: Nuwave\Lighthouse\Schema\Directives\WithCountDirective
 """
@@ -1545,7 +1545,7 @@ directive @withCount(
   Apply scopes to the underlying query.
   """
   scopes: [String!]
-) repeatable on FIELD_DEFINITION
+) on FIELD_DEFINITION
 
 # Directive class: Nuwave\Lighthouse\Schema\Directives\WithDirective
 """
@@ -1562,4 +1562,4 @@ directive @with(
   Apply scopes to the underlying query.
   """
   scopes: [String!]
-) repeatable on FIELD_DEFINITION
+) on FIELD_DEFINITION
