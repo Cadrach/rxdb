@@ -15,6 +15,7 @@ class RxDBReplicationUsers
         return User::whereRaw("UNIX_TIMESTAMP(updated_at) > ?", $args['minUpdatedAt'])
             ->orderByRaw('updated_at ASC, id ASC')
             ->limit($args['limit'])
+            ->withTrashed() //we need this because we have to update RxDB with deleted items
             ->get()
         ;
     }

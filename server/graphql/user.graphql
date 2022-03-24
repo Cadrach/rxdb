@@ -21,6 +21,9 @@ type Query {
 
     "RxDB"
     rxDBReplicationUsers(lastId: String!, minUpdatedAt: Int!, limit: Int!): [User!]!
+
+    "RxDB custom directives :-)"
+    rxPullUsers: [User!]! @rxPullReplicator
 }
 
 "Account of a person who utilizes this application."

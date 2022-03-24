@@ -17,7 +17,7 @@ const pullQueryBuilder = (doc:any) => {
         };
     }
     const query = `{
-        rxDBReplicationUsers(lastId: "${doc.uuid}", minUpdatedAt: ${moment(doc.updated_at).unix()}, limit: 5) {
+        rxPullUsers(lastId: "${doc.uuid}", minUpdatedAt: ${moment(doc.updated_at).unix()}, limit: 5) {
             uuid,
             name,
             updated_at
