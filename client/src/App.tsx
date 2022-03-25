@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import './App.css';
 import Test from "./components/Test";
-import {Layout} from "antd";
+import {Layout, Tabs} from "antd";
 import {RxDatabase} from "rxdb/dist/types/types";
 import {useMount} from "ahooks";
 import {createDatabase} from "./rxdb/database";
 import {Provider as RxDbHooksProvider} from "rxdb-hooks";
+import Books from './components/Books';
 
 function App() {
     const [db, setDb] = useState<RxDatabase>();
@@ -18,7 +19,14 @@ function App() {
     return (
         <RxDbHooksProvider db={db}>
             <Layout style={{minHeight: '100vh'}}>
-                <Test/>
+                <Tabs>
+                    <Tabs.TabPane tab="BOOKS" key={0}>
+                        <Books/>
+                    </Tabs.TabPane>
+                    <Tabs.TabPane tab="USERS" key={1}>
+                        <Test/>
+                    </Tabs.TabPane>
+                </Tabs>
             </Layout>
         </RxDbHooksProvider>
     );

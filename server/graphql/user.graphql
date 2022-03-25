@@ -1,8 +1,4 @@
-"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
-scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
-
-"Indicates what fields are available at the top level of a query operation."
-type Query {
+extend type Query {
     "Find a single user by an identifying attribute."
     user(
       "Search by primary key."
@@ -26,7 +22,7 @@ type Query {
     rxPullUsers: [User!]! @rxPullReplicator
 }
 
-type Mutation{
+extend type Mutation{
     rxPushUsers(uuid:String!, name: String!, email: String, password:String, deleted_at: DateTime): User @rxPushReplicator
 }
 

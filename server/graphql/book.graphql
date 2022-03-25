@@ -1,0 +1,29 @@
+extend type Query {
+    "RxDB custom directives :-)"
+    rxPullBooks: [Book!]! @rxPullReplicator
+}
+
+extend type Mutation{
+    rxPushBooks(uuid:String!, name: String!, deleted_at: DateTime): Book @rxPushReplicator
+}
+
+"Account of a person who utilizes this application."
+type Book {
+    "Unique primary key."
+    id: ID!
+
+    "Unique uuid."
+    uuid: String!
+
+    "Non-unique name."
+    name: String!
+
+    "When the account was created."
+    created_at: DateTime!
+
+    "When the account was last updated."
+    updated_at: DateTime!
+
+    "When the account was last updated."
+    deleted_at: DateTime
+}
