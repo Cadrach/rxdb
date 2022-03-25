@@ -13,11 +13,11 @@ const pullQueryBuilder = (doc:any) => {
         // the first pull does not have a start-document
         doc = {
             uuid: '',
-            updated_at: null
+            updated_at: 0
         };
     }
     const query = `{
-        rxPullUsers(lastId: "${doc.uuid}", minUpdatedAt: ${moment(doc.updated_at).unix()}, limit: 5) {
+        rxPullUsers(lastId: "${doc.uuid}", minUpdatedAt: "${doc.updated_at}", limit: 5) {
             uuid,
             name,
             updated_at

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Space, Table} from "antd";
 import {useRxCollection, useRxData} from "rxdb-hooks";
-import { v4 as uuidv4} from "uuid";
+import {ulid} from 'ulid';
 import moment from 'moment';
 
 const Test = () => {
@@ -9,7 +9,7 @@ const Test = () => {
     const {result: users} = useRxData('users', c => c.find());
 
     const addItem = () => {
-        const id = uuidv4();
+        const id = ulid();
         console.log("ADD ITEM ", id);
         usersCollection?.insert({
             "uuid": id,
@@ -36,8 +36,9 @@ const Test = () => {
     return <span>
         <Table {...tableConfig}/>
         <Space>
-            <Button onClick={addItem}>TEST</Button>
+            <Button onClick={addItem}>Add item</Button>
             <Button onClick={() => usersCollection?.remove()}>Truncate</Button>
+            <b>{users.length} Users</b>
         </Space>
     </span>;
 };

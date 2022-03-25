@@ -39,7 +39,7 @@ GRAPHQL
         );
         $fieldDefinition->arguments[] = Parser::inputValueDefinition(/** @lang GraphQL */ <<<'GRAPHQL'
 "Latest update."
-minUpdatedAt: Int!
+minUpdatedAt: String
 GRAPHQL
         );
         $fieldDefinition->arguments[] = Parser::inputValueDefinition(/** @lang GraphQL */ <<<'GRAPHQL'
@@ -54,8 +54,9 @@ GRAPHQL
         return $fieldValue->setResolver(
             function ($root, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)use($fieldValue)  {
                 $query = $this->getModelClass()::query();
+                $updatedAt = $args['minUpdatedAt']??0;
 
-                return $query->whereRaw("UNIX_TIMESTAMP(updated_at) > ?", $args['minUpdatedAt'])
+                return $query->whereRaw("updated_at > ? OR (updated_at = ? AND uuid > ?)", [$updatedAt, $updatedAt, $args['lastId']])
                     ->orderByRaw('updated_at ASC, id ASC')
                     ->limit($args['limit'])
                     ->withTrashed() //we need this because we have to update RxDB with deleted items
