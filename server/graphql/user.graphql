@@ -26,6 +26,10 @@ type Query {
     rxPullUsers: [User!]! @rxPullReplicator
 }
 
+type Mutation{
+    rxPushUsers(uuid:String!, name: String!, email: String, password:String, deleted_at: DateTime): User @rxPushReplicator
+}
+
 "Account of a person who utilizes this application."
 type User {
     "Unique primary key."

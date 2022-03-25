@@ -3,6 +3,7 @@ import {Button, Space, Table} from "antd";
 import {useRxCollection, useRxData} from "rxdb-hooks";
 import {ulid} from 'ulid';
 import moment from 'moment';
+import {RxDocument} from "rxdb/dist/types/types";
 
 const Test = () => {
     const usersCollection = useRxCollection('users');
@@ -13,13 +14,15 @@ const Test = () => {
         console.log("ADD ITEM ", id);
         usersCollection?.insert({
             "uuid": id,
-            "email": "test@test.com",
+            "email": id + "@test.com",
             "name": "test",
         });
     };
 
-    const deleteItem = (row:any) => {
-        usersCollection?.bulkRemove([row.id]);
+    const deleteItem = (row:RxDocument) => {
+        row.atomicPatch({deleted_at: moment().format('YYYY-MM-DD HH:mm:ss')});
+
+
     };
 
     const tableConfig = {
@@ -29,7 +32,8 @@ const Test = () => {
             {title: 'ID', dataIndex: "uuid"},
             {title: "Name", dataIndex: "name"},
             {title: "Updated At", dataIndex: "updated_at", render: (date:any) => moment(date).fromNow()},
-            {render: (row:any) => <Button onClick={() => deleteItem(row)}>Delete</Button>}
+            {title: "temporary", dataIndex: "_isTemporary"},
+            {render: (row:any) => <Button onClick={() => deleteItem(row)} danger type="primary">Delete</Button>, align: 'right' as 'right'}
         ]
     };
 

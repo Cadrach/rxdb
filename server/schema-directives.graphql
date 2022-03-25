@@ -14,6 +14,12 @@ Query multiple model entries as a paginated list.
 """
 directive @rxPullReplicator on FIELD_DEFINITION
 
+# Directive class: App\GraphQL\Directives\RxPushReplicatorDirective
+"""
+Create or update an Eloquent model with the input values of the field.
+"""
+directive @rxPushReplicator on FIELD_DEFINITION | ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+
 # Directive class: Nuwave\Lighthouse\Auth\AuthDirective
 """
 Return the currently authenticated user as the result of a query.
